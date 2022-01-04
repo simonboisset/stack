@@ -1,0 +1,36 @@
+{
+  "name": "esbuild-app",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "author": "Simon Boisset",
+  "license": "MIT",
+  "scripts": {
+    "build": "node esbuild/prod",
+    "type-check": "tsc --noEmit",
+    "start": "  nodemon --watch dist --exec 'yarn type-check & yarn lint & node dist/index.js' & node esbuild/dev",
+    "migrate": "yarn prisma migrate dev --name init",
+    "serve": "node dist/index",
+    "lint": "eslint src/client/**/*.ts src/client/**/*.tsx"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.12",
+    "@types/react": "^17.0.37",
+    "@types/react-dom": "^17.0.11",
+    "@types/styled-components": "^5.1.18",
+    "@typescript-eslint/eslint-plugin": "^5.8.0",
+    "@typescript-eslint/parser": "^5.8.0",
+    "eslint": "^8.5.0",
+    "eslint-config-react-app": "^7.0.0",
+    "typescript": "^4.5.4"
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "dotenv": "^10.0.0",
+    "esbuild": "^0.14.3",
+    "fastify": "^3.25.0",
+    "fastify-static": "^4.5.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "styled-components": "^5.3.3"
+  }
+}
