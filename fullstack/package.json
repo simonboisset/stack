@@ -1,5 +1,5 @@
 {
-  "name": "esbuild-app",
+  "name": "esbuild-fullstack",
   "version": "1.0.0",
   "main": "dist/index.js",
   "author": "Simon Boisset",
@@ -24,7 +24,6 @@
     "typescript": "^4.5.4"
   },
   "dependencies": {
-    "axios": "^0.24.0",
     "dotenv": "^10.0.0",
     "esbuild": "^0.14.3",
     "fastify": "^3.25.0",
