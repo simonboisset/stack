@@ -20,8 +20,7 @@ Object.keys(process.env).forEach((key) => {
 const openBrowser = () => {
   setTimeout(() => {
     const op = { darwin: ['open'], linux: ['xdg-open'], win32: ['cmd', '/c', 'start'] };
-    const ptf = process.platform;
-    if (clients.length === 0) spawn(op[ptf][0], [...[op[ptf].slice(1)], 'http://localhost:3000']);
+    if (clients.length === 0) spawn(op[process.platform][0], ['http://localhost:3000']);
   }, 1000);
 };
 
@@ -32,6 +31,7 @@ esbuild
     minify: true,
     define: clientEnv,
     outfile: 'dist/public/index.js',
+    sourcemap: 'inline',
     watch: {
       onRebuild(error) {
         setTimeout(() => {
@@ -52,8 +52,8 @@ esbuild
     bundle: true,
     outfile: 'dist/index.js',
     platform: 'node',
-    incremental: true,
     define: serverEnv,
+    sourcemap: 'inline',
     watch: {
       onRebuild: (error) => {
         console.log(error || 'server rebuilt');
@@ -75,7 +75,7 @@ esbuild.serve({ servedir: './' }, {}).then(() => {
           'Cache-Control': 'no-cache',
           'Access-Control-Allow-Origin': '*',
           Connection: 'keep-alive',
-        })
+        }),
       );
     }
 
@@ -85,7 +85,7 @@ esbuild.serve({ servedir: './' }, {}).then(() => {
         res.writeHead(prxRes.statusCode, prxRes.headers);
         prxRes.pipe(res, { end: true });
       }),
-      { end: true }
+      { end: true },
     );
     return null;
   }).listen(5010);
